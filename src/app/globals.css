@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+body {
+  font-family: "Neue Haas Grotesk Display Pro", sans-serif;
+}
+
+.footer-header {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 130%;
+  letter-spacing: 0;
+  color: #787878;
+}
+
+.line-height {
+  line-height: 50px;
+}
