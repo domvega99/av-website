@@ -1,37 +1,46 @@
 import { notFound } from "next/navigation";
-import { getPhoto } from "@/lib/unsplash";
-import { Photo } from "@/lib/type";
 import Modal from "@/app/components/Modal";
-import PhotoDetails from "@/app/components/PhotoDetails";
+import FleetDetails from "@/app/components/FleetDetails";
 
-interface PhotoModalPageProps {
+interface Fleet {
+  id: number;
+  name: string;
+  grt: string;
+  image: string;
+}
+
+interface FleetModalPageProps {
   params: {
     id: string;
   };
 }
 
-const PhotoModalPage = async ({ params }: PhotoModalPageProps) => {
-  const { id } = await params
-  const response = await getPhoto(id);
+const getFleetById = (id: number): Fleet | null => {
+  const fleetData = Array(12)
+    .fill(null)
+    .map((_, index) => ({
+      id: index + 1,
+      name: "MV JOSEN",
+      grt: "1200.00",
+      image: "/images/about-hero.png",
+    }));
 
-  if (response.status === 404) {
+  return fleetData.find((fleet) => fleet.id === id) || null;
+};
+
+const FleetModalPage = async ({ params }: FleetModalPageProps) => {
+  const { id } = await params;
+  const fleet = getFleetById(+id);
+
+  if (!fleet) {
     notFound();
   }
 
-  const photo = (await response.json()) as Photo;
-
   return (
     <Modal>
-      <PhotoDetails
-        src={photo.urls.regular}
-        alt={photo.alt_description}
-        photographer={{
-          name: photo.user.name,
-          instagram: photo.user.social.instagram_username,
-        }}
-      />
+      <FleetDetails name={fleet.name} grt={fleet.grt} image={fleet.image} />
     </Modal>
   );
 };
 
-export default PhotoModalPage;
+export default FleetModalPage;

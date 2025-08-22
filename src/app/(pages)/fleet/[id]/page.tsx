@@ -1,34 +1,41 @@
+import FleetDetails from "@/app/components/FleetDetails";
 import { notFound } from "next/navigation";
-import { getPhoto } from "@/lib/unsplash";
-import PhotoDetails from "@/app/components/PhotoDetails";
-import { Photo } from "@/lib/type";
 
-interface PhotoPageProps {
+interface Fleet {
+  id: number;
+  name: string;
+  grt: string;
+  image: string;
+}
+
+interface FleetPageProps {
   params: {
     id: string;
   };
 }
 
-const PhotoPage = async ({ params }: PhotoPageProps) => {
-  const { id } = await params
-  const response = await getPhoto(id);
+const getFleetById = (id: number): Fleet | null => {
+  const fleetData = Array(12)
+    .fill(null)
+    .map((_, index) => ({
+      id: index + 1,
+      name: "MV JOSEN",
+      grt: "1200.00",
+      image: "/images/about-hero.png",
+    }));
 
-  if (response.status === 404) {
+  return fleetData.find((fleet) => fleet.id === id) || null;
+};
+
+const FleetPage = async ({ params }: FleetPageProps) => {
+  const { id } = await params;
+  const fleet = getFleetById(+id);
+
+  if (!fleet) {
     notFound();
   }
 
-  const photo = (await response.json()) as Photo;
-
-  return (
-    <PhotoDetails
-      src={photo.urls.regular}
-      alt={photo.alt_description}
-      photographer={{
-        name: photo.user.name,
-        instagram: photo.user.social.instagram_username,
-      }}
-    />
-  );
+  return <FleetDetails name={fleet.name} grt={fleet.grt} image={fleet.image} />;
 };
 
-export default PhotoPage;
+export default FleetPage;
