@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ children }) => {
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 bg-black/70" />
 
-        <Dialog.DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Dialog.DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 lg:w-1/4 w-11/12">
           <Dialog.Title className="text-xl font-semibold mb-4"></Dialog.Title>
           {children}
         </Dialog.DialogContent>

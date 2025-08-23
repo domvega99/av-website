@@ -26,7 +26,7 @@ export default function RootLayout({
       <body>
         <div className="max-w-[1512px] mx-auto">
           <Header />
-          <main className="flex-1 px-[80px]">{children}</main>
+          <main className="flex-1 px-[20px] md:px-[80px]">{children}</main>
           {fleet}
         </div>
         <div className="border-t-2 border-[#787878]">

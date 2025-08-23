@@ -35,7 +35,12 @@ const FleetPage = async ({ params }: FleetPageProps) => {
     notFound();
   }
 
-  return <FleetDetails name={fleet.name} grt={fleet.grt} image={fleet.image} />;
+  // return <FleetDetails name={fleet.name} grt={fleet.grt} image={fleet.image} />;
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-4 p-4">
+      test
+    </div>
+  );
 };
 
 export default FleetPage;

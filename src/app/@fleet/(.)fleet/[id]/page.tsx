@@ -38,7 +38,7 @@ const FleetModalPage = async ({ params }: FleetModalPageProps) => {
 
   return (
     <Modal>
-      <FleetDetails name={fleet.name} grt={fleet.grt} image={fleet.image} />
+      <FleetDetails id={fleet.id} name={fleet.name} grt={fleet.grt} image={fleet.image} />
     </Modal>
   );
 };
